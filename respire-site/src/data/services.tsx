@@ -175,8 +175,7 @@ export const SERVICE_SECTIONS: {
           refreshed, rejuvenated, and supremely relaxed.
         </p>
         <p>
-          <Link to="/events">View upcoming group breaths on the Events page</Link>
-          . To host a group at your home, contact Aaron.
+          <Link to="/events">View upcoming group breaths on the Events page</Link>. To host a group at your home, contact Aaron.
         </p>
       </>
     ),

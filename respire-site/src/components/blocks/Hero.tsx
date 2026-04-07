@@ -5,7 +5,7 @@ export function Hero() {
   return (
     <div className="hero">
       <div className="hero__bg" aria-hidden>
-        <FlowerOfLifeLogo className="hero__watermark" />
+        <FlowerOfLifeLogo variant="hero" className="hero__watermark" />
       </div>
       <div className="hero__content container">
         <h1 className="hero__title">

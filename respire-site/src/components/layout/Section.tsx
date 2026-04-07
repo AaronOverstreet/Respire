@@ -9,10 +9,12 @@ export function Section({
   children: ReactNode;
   className?: string;
   id?: string;
-  tone?: "default" | "soft";
+  tone?: "default" | "soft" | "warm" | "cool" | "sunset";
 }) {
   const toneClass =
-    tone === "soft" ? "section section--soft" : "section";
+    tone === "default"
+      ? "section"
+      : `section section--${tone}`;
   return (
     <section id={id} className={`${toneClass} ${className}`.trim()}>
       {children}

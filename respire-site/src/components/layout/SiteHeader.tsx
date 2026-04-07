@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { FlowerOfLifeLogo } from "../ui/FlowerOfLifeLogo";
 
 const nav = [
@@ -13,8 +14,15 @@ const nav = [
 const CALENDLY = "https://calendly.com/overstreetaaron";
 
 export function SiteHeader() {
+  const [navOpen, setNavOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setNavOpen(false);
+  }, [location.pathname]);
+
   return (
-    <header className="site-header">
+    <header className={`site-header ${navOpen ? "is-nav-open" : ""}`}>
       <div className="site-header__inner container">
         <NavLink to="/" className="site-header__brand" end>
           <span className="site-header__logo" aria-hidden>
@@ -25,7 +33,23 @@ export function SiteHeader() {
             <span className="site-header__wordmark-sub">Breathwork</span>
           </span>
         </NavLink>
-        <nav className="site-header__nav" aria-label="Primary">
+        <button
+          type="button"
+          className="site-header__menu-btn"
+          aria-expanded={navOpen}
+          aria-controls="primary-nav"
+          onClick={() => setNavOpen((o) => !o)}
+        >
+          <span className="sr-only">
+            {navOpen ? "Close navigation menu" : "Open navigation menu"}
+          </span>
+          <span className="site-header__burger" aria-hidden />
+        </button>
+        <nav
+          className="site-header__nav"
+          id="primary-nav"
+          aria-label="Primary"
+        >
           <ul className="site-header__list">
             {nav.map((item) => (
               <li key={item.to}>

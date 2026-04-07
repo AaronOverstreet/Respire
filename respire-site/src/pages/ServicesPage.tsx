@@ -13,7 +13,7 @@ export function ServicesPage() {
 
   return (
     <>
-      <Section>
+      <Section tone="warm">
         <Container>
           <h1 className="page-title">Services</h1>
           <p className="prose" style={{ maxWidth: "52rem" }}>
@@ -32,12 +32,12 @@ export function ServicesPage() {
           </p>
         </Container>
       </Section>
-      <Section tone="soft">
+      <Section tone="cool">
         <Container>
           <ServiceAccordion items={items} />
         </Container>
       </Section>
-      <Section>
+      <Section tone="sunset">
         <Container>
           <div className="surface-card services-location">
             <h2 className="services-location__title">Location &amp; modalities</h2>
@@ -51,8 +51,8 @@ export function ServicesPage() {
               <a href="tel:+15032906496">+1 (503) 290-6496</a>
             </p>
             <p>
-              <a href="/contact">Contact form</a> — for questions and scheduling
-              support.
+              Use the <a href="/contact">contact form</a> for questions and
+              scheduling support.
             </p>
           </div>
         </Container>

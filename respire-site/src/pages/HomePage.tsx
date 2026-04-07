@@ -28,17 +28,17 @@ export function HomePage() {
           <TaglineStrip />
         </Container>
       </Section>
-      <Section tone="soft">
+      <Section tone="warm">
         <Container>
           <DictionaryDefinition />
         </Container>
       </Section>
-      <Section>
+      <Section tone="cool">
         <Container>
           <AboutTeaser />
         </Container>
       </Section>
-      <Section tone="soft">
+      <Section tone="sunset">
         <Container>
           <RebirthingExplainer />
         </Container>
@@ -46,11 +46,6 @@ export function HomePage() {
       <Section>
         <Container>
           <BookingStrip />
-        </Container>
-      </Section>
-      <Section tone="soft">
-        <Container>
-          <NewsletterSignup />
         </Container>
       </Section>
       <Section>
@@ -71,6 +66,11 @@ export function HomePage() {
               More testimonials
             </Link>
           </p>
+        </Container>
+      </Section>
+      <Section tone="warm">
+        <Container>
+          <NewsletterSignup />
         </Container>
       </Section>
     </>

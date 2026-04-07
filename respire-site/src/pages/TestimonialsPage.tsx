@@ -7,6 +7,8 @@ import { TESTIMONIALS } from "../data/testimonials";
 export function TestimonialsPage() {
   const featured = TESTIMONIALS.find((t) => t.featured);
   const rest = TESTIMONIALS.filter((t) => !t.featured);
+  const last = rest.length > 0 ? rest[rest.length - 1] : null;
+  const others = rest.length > 1 ? rest.slice(0, -1) : [];
 
   return (
     <>
@@ -29,9 +31,12 @@ export function TestimonialsPage() {
       <Section>
         <Container>
           <div className="testimonials-grid">
-            {rest.map((t) => (
+            {others.map((t) => (
               <TestimonialCard key={t.id} t={t} />
             ))}
+            {last ? (
+              <TestimonialCard key={last.id} t={last} variant="wide" />
+            ) : null}
           </div>
         </Container>
       </Section>

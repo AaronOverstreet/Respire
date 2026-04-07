@@ -4,6 +4,7 @@ export type EventItem = {
   description: string;
   href?: string;
   external?: boolean;
+  ctaLabel?: string;
 };
 
 export const EVENTS: EventItem[] = [
@@ -19,6 +20,7 @@ export const EVENTS: EventItem[] = [
     description: "General training and seminar listings from RBI.",
     href: "https://www.rebirthingbreathwork.com/general-6",
     external: true,
+    ctaLabel: "View RBI trainings",
   },
   {
     id: "one-year",
@@ -26,6 +28,7 @@ export const EVENTS: EventItem[] = [
     description: "Long-form training opportunities through RBI.",
     href: "https://www.rebirthingbreathwork.com/one-year-seminar",
     external: true,
+    ctaLabel: "Seminar details",
   },
   {
     id: "mysticmag",
@@ -33,5 +36,6 @@ export const EVENTS: EventItem[] = [
     description: "Feature on breathwork experts including Aaron.",
     href: "https://www.mysticmag.com/online-therapy/experts-breathwork/",
     external: true,
+    ctaLabel: "Read the feature",
   },
 ];

@@ -5,7 +5,7 @@ import { EVENTS } from "../data/events";
 export function EventsPage() {
   return (
     <>
-      <Section>
+      <Section tone="warm">
         <Container>
           <h1 className="page-title">Events</h1>
           <p className="prose" style={{ maxWidth: "52rem" }}>
@@ -15,24 +15,26 @@ export function EventsPage() {
           </p>
         </Container>
       </Section>
-      <Section tone="soft">
+      <Section tone="cool">
         <Container>
           <ul className="events-list">
             {EVENTS.map((ev) => (
-              <li key={ev.id} className="service-accordion__item surface-card">
+              <li key={ev.id} className="surface-card events-list__card">
                 <h2 className="events-list__title">{ev.title}</h2>
-                <p>{ev.description}</p>
+                <p className="events-list__desc">{ev.description}</p>
                 {ev.href && (
-                  <p>
+                  <div className="events-list__actions">
                     <a
+                      className="btn btn--primary btn--external"
                       href={ev.href}
                       {...(ev.external
                         ? { target: "_blank", rel: "noopener noreferrer" }
                         : {})}
                     >
-                      {ev.external ? "Opens external site" : "Learn more"}
+                      {ev.ctaLabel ??
+                        (ev.external ? "Open link" : "Learn more")}
                     </a>
-                  </p>
+                  </div>
                 )}
               </li>
             ))}
