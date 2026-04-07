@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { CALENDLY } from "../../constants/site";
 import { FlowerOfLifeLogo } from "../ui/FlowerOfLifeLogo";
 
 const nav = [
@@ -10,8 +11,6 @@ const nav = [
   { to: "/testimonials", label: "Testimonials" },
   { to: "/contact", label: "Contact" },
 ];
-
-const CALENDLY = "https://calendly.com/overstreetaaron";
 
 export function SiteHeader() {
   const [navOpen, setNavOpen] = useState(false);

@@ -1,7 +1,7 @@
 import { ContactForm } from "../components/blocks/ContactForm";
 import { Container } from "../components/layout/Container";
 import { Section } from "../components/layout/Section";
-import { CALENDLY } from "../data/services";
+import { CALENDLY } from "../constants/site";
 
 export function ContactPage() {
   return (

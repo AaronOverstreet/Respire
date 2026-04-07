@@ -1,4 +1,4 @@
-const CALENDLY = "https://calendly.com/overstreetaaron";
+import { CALENDLY } from "../../constants/site";
 
 export function BookingStrip() {
   return (

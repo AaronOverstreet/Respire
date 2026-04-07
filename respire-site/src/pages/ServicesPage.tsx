@@ -1,7 +1,8 @@
 import { ServiceAccordion } from "../components/blocks/ServiceAccordion";
 import { Container } from "../components/layout/Container";
 import { Section } from "../components/layout/Section";
-import { CALENDLY, SERVICE_SECTIONS } from "../data/services";
+import { CALENDLY } from "../constants/site";
+import { SERVICE_SECTIONS } from "../data/services";
 
 export function ServicesPage() {
   const items = SERVICE_SECTIONS.map((s) => ({

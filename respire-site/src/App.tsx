@@ -15,17 +15,17 @@ export default function App() {
     <>
       <ScrollToTop />
       <SiteShell>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/events" element={<EventsPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/testimonials" element={<TestimonialsPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPage />} />
-        <Route path="/disclaimer" element={<DisclaimerPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/testimonials" element={<TestimonialsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPage />} />
+          <Route path="/disclaimer" element={<DisclaimerPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </SiteShell>
     </>
   );
