@@ -9,6 +9,7 @@ export function ServicesPage() {
     title: s.title,
     summary: s.summary,
     body: s.body,
+    featured: s.id === "rebirthing",
   }));
 
   return (

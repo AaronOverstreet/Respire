@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { ScrollToTop } from "./components/layout/ScrollToTop";
 import { SiteShell } from "./components/layout/SiteShell";
 import { AboutPage } from "./pages/AboutPage";
 import { ContactPage } from "./pages/ContactPage";
@@ -11,7 +12,9 @@ import { TestimonialsPage } from "./pages/TestimonialsPage";
 
 export default function App() {
   return (
-    <SiteShell>
+    <>
+      <ScrollToTop />
+      <SiteShell>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/services" element={<ServicesPage />} />
@@ -23,6 +26,7 @@ export default function App() {
         <Route path="/disclaimer" element={<DisclaimerPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </SiteShell>
+      </SiteShell>
+    </>
   );
 }

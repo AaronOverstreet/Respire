@@ -6,11 +6,13 @@ export type ServiceItem = {
   title: string;
   summary: string;
   body: ReactNode;
+  /** Highlights this row as the core / signature offering (e.g. rebirthing). */
+  featured?: boolean;
 };
 
 export function ServiceAccordion({ items }: { items: ServiceItem[] }) {
   const baseId = useId();
-  const [open, setOpen] = useState<string | null>(items[0]?.id ?? null);
+  const [open, setOpen] = useState<string | null>(null);
 
   return (
     <div className="service-accordion">
@@ -19,16 +21,34 @@ export function ServiceAccordion({ items }: { items: ServiceItem[] }) {
         const panelId = `${baseId}-${item.id}-panel`;
         const headerId = `${baseId}-${item.id}-header`;
         return (
-          <div key={item.id} className="service-accordion__item surface-card">
+          <div
+            key={item.id}
+            className={
+              item.featured
+                ? "service-accordion__item service-accordion__item--featured surface-card"
+                : "service-accordion__item surface-card"
+            }
+          >
             <button
               type="button"
               id={headerId}
-              className="service-accordion__trigger"
+              className={
+                item.featured
+                  ? "service-accordion__trigger service-accordion__trigger--featured"
+                  : "service-accordion__trigger"
+              }
               aria-expanded={isOpen}
               aria-controls={panelId}
               onClick={() => setOpen(isOpen ? null : item.id)}
             >
-              <span>{item.title}</span>
+              <span className="service-accordion__trigger-label">
+                {item.featured ? (
+                  <span className="service-accordion__badge">
+                    <span aria-hidden>★</span> Signature offering
+                  </span>
+                ) : null}
+                <span className="service-accordion__title-text">{item.title}</span>
+              </span>
               <span className="service-accordion__icon" aria-hidden>
                 {isOpen ? "−" : "+"}
               </span>
