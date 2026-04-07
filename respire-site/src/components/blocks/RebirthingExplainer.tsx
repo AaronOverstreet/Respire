@@ -1,4 +1,6 @@
+import { LEONARD_HOME_ATTR, LEONARD_HOME_QUOTE } from "../../data/testimonials";
 import { BenefitsList } from "./BenefitsList";
+import { QuoteBlock } from "./QuoteBlock";
 
 export function RebirthingExplainer() {
   return (
@@ -30,6 +32,9 @@ export function RebirthingExplainer() {
           </h3>
           <BenefitsList />
         </div>
+      </div>
+      <div className="rebirthing-explainer__leonard">
+        <QuoteBlock quote={LEONARD_HOME_QUOTE} attribution={LEONARD_HOME_ATTR} />
       </div>
     </div>
   );

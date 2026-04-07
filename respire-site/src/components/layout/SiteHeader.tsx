@@ -24,15 +24,6 @@ export function SiteHeader() {
   return (
     <header className={`site-header ${navOpen ? "is-nav-open" : ""}`}>
       <div className="site-header__inner container">
-        <NavLink to="/" className="site-header__brand" end>
-          <span className="site-header__logo" aria-hidden>
-            <FlowerOfLifeLogo className="site-header__logo-svg" />
-          </span>
-          <span className="site-header__wordmark">
-            <span className="site-header__wordmark-main">Respire</span>
-            <span className="site-header__wordmark-sub">Breathwork</span>
-          </span>
-        </NavLink>
         <button
           type="button"
           className="site-header__menu-btn"
@@ -45,6 +36,18 @@ export function SiteHeader() {
           </span>
           <span className="site-header__burger" aria-hidden />
         </button>
+        <NavLink to="/" className="site-header__brand" end>
+          <span className="site-header__logo" aria-hidden>
+            <FlowerOfLifeLogo className="site-header__logo-svg" />
+          </span>
+          <span className="site-header__wordmark">
+            <span className="site-header__wordmark-main">Respire</span>
+            <span className="site-header__wordmark-sub">Breathwork</span>
+          </span>
+        </NavLink>
+        <a className="btn btn--primary site-header__cta" href={CALENDLY}>
+          Book
+        </a>
         <nav
           className="site-header__nav"
           id="primary-nav"
@@ -66,9 +69,6 @@ export function SiteHeader() {
             ))}
           </ul>
         </nav>
-        <a className="btn btn--primary site-header__cta" href={CALENDLY}>
-          Book
-        </a>
       </div>
     </header>
   );

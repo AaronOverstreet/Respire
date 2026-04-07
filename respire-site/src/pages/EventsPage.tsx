@@ -2,6 +2,16 @@ import { Container } from "../components/layout/Container";
 import { Section } from "../components/layout/Section";
 import { EVENTS } from "../data/events";
 
+const ACCENT_CLASS: Record<
+  NonNullable<(typeof EVENTS)[number]["accent"]>,
+  string
+> = {
+  sun: "events-list__card--sun",
+  sea: "events-list__card--sea",
+  coral: "events-list__card--coral",
+  bloom: "events-list__card--bloom",
+};
+
 export function EventsPage() {
   return (
     <>
@@ -15,29 +25,38 @@ export function EventsPage() {
           </p>
         </Container>
       </Section>
-      <Section tone="cool">
+      <Section tone="cool" className="section--events-list">
         <Container>
           <ul className="events-list">
-            {EVENTS.map((ev) => (
-              <li key={ev.id} className="surface-card events-list__card">
-                <h2 className="events-list__title">{ev.title}</h2>
-                <p className="events-list__desc">{ev.description}</p>
-                {ev.href && (
-                  <div className="events-list__actions">
-                    <a
-                      className="btn btn--primary btn--external"
-                      href={ev.href}
-                      {...(ev.external
-                        ? { target: "_blank", rel: "noopener noreferrer" }
-                        : {})}
-                    >
-                      {ev.ctaLabel ??
-                        (ev.external ? "Open link" : "Learn more")}
-                    </a>
-                  </div>
-                )}
-              </li>
-            ))}
+            {EVENTS.map((ev) => {
+              const accent =
+                ev.accent && ACCENT_CLASS[ev.accent]
+                  ? ACCENT_CLASS[ev.accent]
+                  : "";
+              return (
+                <li
+                  key={ev.id}
+                  className={`surface-card events-list__card ${accent}`.trim()}
+                >
+                  <h2 className="events-list__title">{ev.title}</h2>
+                  <p className="events-list__desc">{ev.description}</p>
+                  {ev.href && (
+                    <div className="events-list__actions">
+                      <a
+                        className="btn btn--primary btn--external"
+                        href={ev.href}
+                        {...(ev.external
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                      >
+                        {ev.ctaLabel ??
+                          (ev.external ? "Open link" : "Learn more")}
+                      </a>
+                    </div>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </Container>
       </Section>

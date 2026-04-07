@@ -17,7 +17,7 @@ export function FeaturedTestimonial({ t }: { t: Testimonial }) {
           />
         )}
         <div>
-          <p className="featured-testimonial__label">Featured</p>
+          <p className="sr-only">Featured testimonial</p>
           <blockquote className="featured-testimonial__quote">
             {paragraphs.map((p, i) => (
               <p key={i}>{p}</p>

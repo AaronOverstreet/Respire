@@ -12,24 +12,14 @@ export function TestimonialsPage() {
 
   return (
     <>
-      <Section>
+      <Section tone="soft" className="section--testimonials-hub">
         <Container>
-          <h1 className="page-title">Testimonials</h1>
-          <p className="prose" style={{ maxWidth: "52rem" }}>
-            Gratitude to everyone who has shared their experience. Leonard
-            Orr&apos;s words are highlighted first.
-          </p>
-        </Container>
-      </Section>
-      {featured && (
-        <Section tone="soft">
-          <Container>
-            <FeaturedTestimonial t={featured} />
-          </Container>
-        </Section>
-      )}
-      <Section>
-        <Container>
+          <h1 className="page-title page-title--testimonials-hub">Testimonials</h1>
+          {featured ? (
+            <div className="testimonials-hub__featured">
+              <FeaturedTestimonial t={featured} />
+            </div>
+          ) : null}
           <div className="testimonials-grid">
             {others.map((t) => (
               <TestimonialCard key={t.id} t={t} />
