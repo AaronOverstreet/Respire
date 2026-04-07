@@ -1,0 +1,9 @@
+{
+  "name": "respire-site-workspace",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix respire-site",
+    "build": "npm run build --prefix respire-site",
+    "preview": "npm run preview --prefix respire-site"
+  }
+}
