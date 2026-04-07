@@ -71,3 +71,13 @@ export default defineConfig([
   },
 ])
 ```
+
+## Deploying to Vercel
+
+In the Vercel project **Settings → General**:
+
+1. **Root Directory** → `respire-site` (required)
+2. **Framework Preset** → Vite (auto-detected)
+3. **Node.js Version** → 20.x or 22.x
+
+`vercel.json` in this folder only adds SPA rewrites so client-side routes work on refresh.

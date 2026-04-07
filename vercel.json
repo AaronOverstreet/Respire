@@ -1,6 +1,0 @@
-{
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
-  "outputDirectory": "respire-site/dist",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
-}
