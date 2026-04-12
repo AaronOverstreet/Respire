@@ -38,7 +38,7 @@ export const SERVICE_SECTIONS: {
     id: "rebirthing",
     title: "Individual Rebirthing Breathwork Sessions",
     summary:
-      "A simple yet powerful healing modality for releasing stored emotion, managing stress, and deep relaxation—in person or on Zoom.",
+      "A simple yet powerful healing modality for releasing stored emotion, managing stress, and deep relaxation—in-person or on Zoom.",
     body: (
       <>
         <p>
@@ -101,7 +101,7 @@ export const SERVICE_SECTIONS: {
           created by Leonard Orr and Laz Jefferson.
         </p>
         <p>
-          Session length is two hours. Sessions are available in person or on
+          Session length is two hours. Sessions are available in-person or on
           Zoom.
         </p>
         <p>
@@ -164,7 +164,7 @@ export const SERVICE_SECTIONS: {
     id: "group",
     title: "Group Rebirthing Breathwork",
     summary:
-      "Supportive group sessions—see Events for upcoming group breaths.",
+      "Supportive group sessions—see Events for upcoming group sessions.",
     body: (
       <>
         <p>
@@ -173,7 +173,8 @@ export const SERVICE_SECTIONS: {
           refreshed, rejuvenated, and supremely relaxed.
         </p>
         <p>
-          <Link to="/events">View upcoming group breaths on the Events page</Link>. To host a group at your home, contact Aaron.
+          <Link to="/events">See Events for upcoming group sessions</Link> or
+          contact Aaron if you&apos;d like to have him work with your group.
         </p>
       </>
     ),
@@ -186,7 +187,7 @@ export const SERVICE_SECTIONS: {
       <>
         <p>
           Mentoring sessions for aspiring breathworkers. Session length is 90
-          minutes, in person or on Zoom.
+          minutes, in-person or on Zoom.
         </p>
         <p>
           <strong>Standard rates:</strong>
@@ -213,14 +214,19 @@ export const SERVICE_SECTIONS: {
     id: "retreats",
     title: "Movement & Breath Retreats",
     summary:
-      "Multi-day retreats with Aaron and Bhagavati—movement, breath, and beautiful locations.",
+      "Multi-day retreats with Aaron and Bhagavati—yoga, breath, and beautiful locations.",
     body: (
       <>
         <p>
-          Aaron and Bhagavati facilitate multi-day retreats centered around
-          movement and breath at beautiful locations. Reach out if you are
-          interested in co-creating or have a vision for a retreat. Watch the
-          Events page for upcoming retreats and subscribe to the newsletter.
+          Aaron and Bhagavati facilitate multi-day retreats centered around yoga
+          and breath at beautiful locations. Reach out if you are interested in
+          co-creating or have a vision for a retreat. Watch the Events page for
+          upcoming retreats and subscribe to the newsletter.
+        </p>
+        <p className="service-accordion__cta-row">
+          <Link className="btn btn--primary" to="/events">
+            Events
+          </Link>
         </p>
       </>
     ),

@@ -1,9 +1,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 
-const PHONE = "+1 (503) 290-6496";
-
-export function ContactForm() {
+export function ContactForm({ embedded = false }: { embedded?: boolean }) {
   const [sent, setSent] = useState(false);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -18,11 +16,15 @@ export function ContactForm() {
     setSent(true);
   }
 
+  const formClass = [
+    "contact-form",
+    embedded ? "contact-form--embedded" : "surface-card",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <form className="contact-form surface-card" onSubmit={handleSubmit}>
-      <p className="contact-form__phone">
-        Or call <a href={`tel:${PHONE.replace(/\D/g, "")}`}>{PHONE}</a>
-      </p>
+    <form className={formClass} onSubmit={handleSubmit}>
       <label className="contact-form__field">
         Your name (required)
         <input name="your-name" required autoComplete="name" />

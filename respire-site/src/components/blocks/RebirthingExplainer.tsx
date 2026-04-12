@@ -22,7 +22,7 @@ export function RebirthingExplainer() {
             more freely as ourselves.
           </p>
           <p>
-            Sessions can be held in person or online via Zoom—so you can work
+            Sessions can be held in-person or online via Zoom—so you can work
             with Aaron wherever you are.
           </p>
         </div>
@@ -35,6 +35,15 @@ export function RebirthingExplainer() {
       </div>
       <div className="rebirthing-explainer__leonard">
         <QuoteBlock quote={LEONARD_HOME_QUOTE} attribution={LEONARD_HOME_ATTR} />
+        <p className="rebirthing-explainer__leonard-link">
+          <a
+            href="https://www.rebirthingbreathwork.com/leonard-orr"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            History of rebirthing breathwork
+          </a>
+        </p>
       </div>
     </div>
   );

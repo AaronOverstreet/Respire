@@ -11,10 +11,10 @@ export function TestimonialsPage() {
   const others = rest.length > 1 ? rest.slice(0, -1) : [];
 
   return (
-    <>
-      <Section tone="soft" className="section--testimonials-hub">
-        <Container>
-          <h1 className="page-title page-title--testimonials-hub">Testimonials</h1>
+    <Section tone="soft" className="section--testimonials-hub">
+      <Container>
+        <h1 className="page-hub-title">Testimonials</h1>
+        <div className="testimonials-hub__content">
           {featured ? (
             <div className="testimonials-hub__featured">
               <FeaturedTestimonial t={featured} />
@@ -28,8 +28,8 @@ export function TestimonialsPage() {
               <TestimonialCard key={last.id} t={last} variant="wide" />
             ) : null}
           </div>
-        </Container>
-      </Section>
-    </>
+        </div>
+      </Container>
+    </Section>
   );
 }

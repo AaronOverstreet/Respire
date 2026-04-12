@@ -1,19 +1,54 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 
-const WORDS = [
-  "Resolve",
-  "Repair",
-  "Restore",
-  "Reclaim",
-  "Rebirth",
-  "Renew",
-  "Revive",
-  "Rebuild",
-];
+/** Full words for accessibility + static fallback; suffix is the part after "Re". */
+const ENTRIES = [
+  { full: "Resolve", suffix: "solve" },
+  { full: "Repair", suffix: "pair" },
+  { full: "Restore", suffix: "store" },
+  { full: "Reclaim", suffix: "claim" },
+  { full: "Rebirth", suffix: "birth" },
+  { full: "Renew", suffix: "new" },
+  { full: "Revive", suffix: "vive" },
+  { full: "Rebuild", suffix: "build" },
+] as const;
+
+const INTERVAL_MS = 1550;
+const FADE_MS = 520;
+
+type ExitTo = "left" | "right";
+
+type AnimState = {
+  current: number;
+  exiting: number | null;
+  /** After a transition, flipped for the *next* exit; infer this transition’s exit side from it. */
+  exitTo: ExitTo;
+};
+
+function suffixMotionClass(i: number, anim: AnimState): string {
+  const { current, exiting, exitTo } = anim;
+  /** Direction the outgoing word is sliding toward (opposite of the next scheduled exitTo). */
+  const exitingToward: ExitTo | null =
+    exiting === null ? null : exitTo === "left" ? "right" : "left";
+
+  if (i === exiting && exitingToward === "left") return "is-exit-left";
+  if (i === exiting && exitingToward === "right") return "is-exit-right";
+  if (i === current && exiting !== null && exitingToward !== null) {
+    const enterFrom: ExitTo = exitingToward === "left" ? "right" : "left";
+    return enterFrom === "left" ? "is-enter-from-left" : "is-enter-from-right";
+  }
+  if (i === current && exiting === null) return "is-settled";
+  return "is-idle";
+}
 
 export function ReWordsBanner() {
-  const [index, setIndex] = useState(0);
+  const [anim, setAnim] = useState<AnimState>({
+    current: 0,
+    exiting: null,
+    exitTo: "left",
+  });
   const [reduceMotion, setReduceMotion] = useState(false);
+
+  const fullList = useMemo(() => ENTRIES.map((e) => e.full), []);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -26,32 +61,55 @@ export function ReWordsBanner() {
   useEffect(() => {
     if (reduceMotion) return;
     const id = window.setInterval(() => {
-      setIndex((i) => (i + 1) % WORDS.length);
-    }, 3200);
+      setAnim((prev) => ({
+        exiting: prev.current,
+        current: (prev.current + 1) % ENTRIES.length,
+        exitTo: prev.exitTo === "left" ? "right" : "left",
+      }));
+    }, INTERVAL_MS);
     return () => window.clearInterval(id);
   }, [reduceMotion]);
+
+  useEffect(() => {
+    if (anim.exiting === null) return;
+    const id = window.setTimeout(() => {
+      setAnim((a) => ({ ...a, exiting: null }));
+    }, FADE_MS);
+    return () => window.clearTimeout(id);
+  }, [anim.exiting]);
 
   if (reduceMotion) {
     return (
       <div className="re-words re-words--static" aria-label="Themes related to respire">
-        <span className="re-words__label">Themes:</span> {WORDS.join(" · ")}
+        <span className="re-words__label">Themes:</span> {fullList.join(" · ")}
       </div>
     );
   }
 
   return (
-    <div className="re-words" aria-live="polite">
-      <span className="sr-only">Rotating themes: {WORDS.join(", ")}</span>
-      <span className="re-words__track" aria-hidden>
-        {WORDS.map((w, i) => (
+    <div className="re-words">
+      <p className="re-words__line">
+        <span className="sr-only" aria-live="polite">
+          Current theme: {ENTRIES[anim.current].full}
+        </span>
+        <span className="re-words__surface" aria-hidden>
+          <span className="re-words__prefix">Re</span>
           <span
-            key={w}
-            className={`re-words__word ${i === index ? "is-visible" : ""}`}
+            className="re-words__suffix-track"
+            style={
+              {
+                "--re-words-fade-ms": `${FADE_MS}ms`,
+              } as CSSProperties
+            }
           >
-            {w}
+            {ENTRIES.map((e, i) => (
+              <span key={e.full} className={`re-words__suffix ${suffixMotionClass(i, anim)}`}>
+                {e.suffix}
+              </span>
+            ))}
           </span>
-        ))}
-      </span>
+        </span>
+      </p>
     </div>
   );
 }

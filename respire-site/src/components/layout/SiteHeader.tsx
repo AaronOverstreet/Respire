@@ -37,7 +37,7 @@ export function SiteHeader() {
         </button>
         <NavLink to="/" className="site-header__brand" end>
           <span className="site-header__logo" aria-hidden>
-            <FlowerOfLifeLogo className="site-header__logo-svg" />
+            <FlowerOfLifeLogo variant="header" className="site-header__logo-svg" />
           </span>
           <span className="site-header__wordmark">
             <span className="site-header__wordmark-main">Respire</span>

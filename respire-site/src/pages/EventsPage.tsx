@@ -1,11 +1,9 @@
+import { NewsletterSignup } from "../components/blocks/NewsletterSignup";
 import { Container } from "../components/layout/Container";
 import { Section } from "../components/layout/Section";
-import { EVENTS } from "../data/events";
+import { eventsChronological, type EventItem } from "../data/events";
 
-const ACCENT_CLASS: Record<
-  NonNullable<(typeof EVENTS)[number]["accent"]>,
-  string
-> = {
+const ACCENT_CLASS: Record<NonNullable<EventItem["accent"]>, string> = {
   sun: "events-list__card--sun",
   sea: "events-list__card--sea",
   coral: "events-list__card--coral",
@@ -13,51 +11,80 @@ const ACCENT_CLASS: Record<
 };
 
 export function EventsPage() {
+  const ordered = eventsChronological();
+
   return (
     <>
-      <Section tone="warm">
+      <Section tone="cool" className="section--events-page">
         <Container>
-          <h1 className="page-title">Events</h1>
-          <p className="prose" style={{ maxWidth: "52rem" }}>
-            Upcoming group breaths, trainings, and features. Dates and details
-            are updated as new offerings are added—subscribe to the newsletter on
-            the home page for announcements.
-          </p>
-        </Container>
-      </Section>
-      <Section tone="cool" className="section--events-list">
-        <Container>
+          <header className="events-page__masthead" aria-labelledby="events-page-heading">
+            <div className="events-page__masthead-deco" aria-hidden />
+            <p className="events-page__eyebrow">Up next</p>
+            <h1 id="events-page-heading" className="events-page__title">
+              Events
+            </h1>
+            <p className="events-page__lede">
+              Sound baths, trainings, and community breathwork—tap a title or
+              flyer for details and links.
+            </p>
+          </header>
+
           <ul className="events-list">
-            {EVENTS.map((ev) => {
+            {ordered.map((ev) => {
               const accent =
                 ev.accent && ACCENT_CLASS[ev.accent]
                   ? ACCENT_CLASS[ev.accent]
                   : "";
+              const linkProps = ev.external
+                ? { target: "_blank" as const, rel: "noopener noreferrer" as const }
+                : {};
               return (
                 <li
                   key={ev.id}
                   className={`surface-card events-list__card ${accent}`.trim()}
                 >
-                  <h2 className="events-list__title">{ev.title}</h2>
-                  <p className="events-list__desc">{ev.description}</p>
-                  {ev.href && (
-                    <div className="events-list__actions">
-                      <a
-                        className="btn btn--primary btn--external"
-                        href={ev.href}
-                        {...(ev.external
-                          ? { target: "_blank", rel: "noopener noreferrer" }
-                          : {})}
-                      >
-                        {ev.ctaLabel ??
-                          (ev.external ? "Open link" : "Learn more")}
-                      </a>
+                  <div
+                    className={`events-list__row${ev.imageSrc ? "" : " events-list__row--text-only"}`}
+                  >
+                    {ev.imageSrc ? (
+                      <figure className="events-list__thumb">
+                        <a
+                          className="events-list__thumb-link"
+                          href={ev.href}
+                          {...linkProps}
+                        >
+                          <img
+                            src={ev.imageSrc}
+                            alt={ev.imageAlt ?? ""}
+                            width={440}
+                            height={330}
+                            loading="lazy"
+                          />
+                        </a>
+                      </figure>
+                    ) : null}
+                    <div className="events-list__body">
+                      <h2 className="events-list__title">
+                        <a
+                          className="events-list__title-link"
+                          href={ev.href}
+                          {...linkProps}
+                        >
+                          {ev.headline}
+                        </a>
+                      </h2>
+                      <p className="events-list__desc">{ev.description}</p>
                     </div>
-                  )}
+                  </div>
                 </li>
               );
             })}
           </ul>
+        </Container>
+      </Section>
+      <Section tone="warm">
+        <Container>
+          <NewsletterSignup />
         </Container>
       </Section>
     </>

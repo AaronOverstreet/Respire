@@ -9,7 +9,7 @@ export function AboutPage() {
         <Container>
           <article className="about-card">
             <header className="about-card__masthead">
-              <h1 className="about-card__title">About Aaron</h1>
+              <h1 className="page-hub-title">About Aaron</h1>
             </header>
 
             <div className="about-card__split">
@@ -17,21 +17,36 @@ export function AboutPage() {
                 <figure className="about-card__figure">
                   <div className="about-card__img-wrap">
                     <img
-                      src="/images/aaron-portrait.jpeg"
-                      alt="Aaron Overstreet, breathwork practitioner"
+                      src="/images/Aaron_Beach.jpeg"
+                      alt="Aaron Overstreet on the coast at sunset, arms crossed, smiling"
                       className="about-card__img"
-                      width={640}
-                      height={800}
+                      width={802}
+                      height={601}
                       loading="eager"
+                      decoding="async"
                     />
                   </div>
                   <figcaption className="about-card__photo-cap">
                     <span className="about-card__name">Aaron Overstreet</span>
                     <span className="about-card__role">
-                      Respire Breathwork · Portland
+                      Respire Breathwork · Portland, Oregon
                     </span>
                   </figcaption>
                 </figure>
+
+                <div className="about-card__photo-card">
+                  <div className="about-card__photo-card-frame">
+                    <img
+                      src="/images/Aaron_Meditating.jpeg"
+                      alt="Aaron Overstreet seated in meditation outdoors, eyes closed, hands resting in his lap"
+                      className="about-card__img about-card__img--meditation"
+                      width={768}
+                      height={1024}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
               </div>
 
               <div className="about-card__split-main">
@@ -78,7 +93,7 @@ export function AboutPage() {
                   </p>
                   <p>
                     Aaron studied directly with Leonard and has led trainings and
-                    workshops in Portland, Virginia, and India. He has also
+                    workshops in Portland, Oregon, Virginia, and India. He has also
                     co-facilitated the annual Breathwork training, &quot;Return To The
                     Sacred,&quot; in Sierraville, CA since 2003. Aaron is certified by{" "}
                     <a

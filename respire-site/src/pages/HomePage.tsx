@@ -20,11 +20,6 @@ export function HomePage() {
   return (
     <>
       <Hero />
-      <Section>
-        <Container>
-          <TaglineStrip />
-        </Container>
-      </Section>
       <Section tone="warm">
         <Container>
           <DictionaryDefinition />
@@ -47,6 +42,8 @@ export function HomePage() {
       </Section>
       <Section tone="soft" className="section--home-clients">
         <Container>
+          <TaglineStrip />
+          <NewsletterSignup />
           <h2 className="home-preview__title">What clients say</h2>
           {featured ? (
             <div className="home-testimonials__featured">
@@ -63,11 +60,6 @@ export function HomePage() {
               More testimonials
             </Link>
           </p>
-        </Container>
-      </Section>
-      <Section tone="warm">
-        <Container>
-          <NewsletterSignup />
         </Container>
       </Section>
     </>

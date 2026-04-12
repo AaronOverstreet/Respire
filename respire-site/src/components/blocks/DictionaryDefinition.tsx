@@ -14,11 +14,6 @@ export function DictionaryDefinition() {
           Recover hope, courage, or strength after a time of difficulty.
         </li>
       </ol>
-      <p className="dictionary__full">
-        <em>Respire:</em> to inhale and exhale air for the purpose of
-        maintaining life; breathe; recover hope, courage, or strength after a
-        time of difficulty.
-      </p>
     </div>
   );
 }
