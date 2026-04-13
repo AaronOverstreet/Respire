@@ -55,7 +55,7 @@ export function PrivacyPage() {
             ad-targeting purposes which includes showing relevant ads on the
             basis of our visitors&apos; geographical location (geotargeting) or
             showing certain ads based on the history of our visitors&apos; web
-            activity prior to coming to our site. RespirePDX.com contains
+            activity prior to coming to our site. RespireBreathwork.com contains
             external links to other websites.
           </p>
           <p>
@@ -76,7 +76,7 @@ export function PrivacyPage() {
           <h2>Proprietary rights</h2>
           <p>
             All information found on this website is the property of
-            RespirePDX.com. If you want to copy some material from our website
+            RespireBreathwork.com. If you want to copy some material from our website
             for public distribution you are required to ask our permission prior
             to doing so. This does not include the information you may decide to
             keep for your personal reference on your local computer.
@@ -95,7 +95,7 @@ export function PrivacyPage() {
 
           <h2>Site security</h2>
           <p>
-            RespirePDX.com has the appropriate security software installed to
+            RespireBreathwork.com has the appropriate security software installed to
             ensure a safe stay on our site for our visitors.
           </p>
 
