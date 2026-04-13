@@ -11,11 +11,11 @@ After commits, run `git push origin <branch>` (usually `main`). Do not push to o
 
 ### Restore dual push (e.g. after a fresh clone)
 
-If `git remote -v` shows only one push URL:
+Run **both** commands so two push URLs are registered (adding only one can leave a single push target):
 
 ```bash
 git remote set-url --add --push origin https://github.com/Reidblaine/Respire-Breathwork.git
 git remote set-url --add --push origin https://github.com/AaronOverstreet/Respire.git
 ```
 
-Fetch continues to use the primary `origin` URL; both entries receive pushes.
+Confirm with `git config --get-all remote.origin.pushurl` (expect two lines). Fetch still uses `remote.origin.url` (typically Reidblaine); both push URLs receive `git push origin`.
