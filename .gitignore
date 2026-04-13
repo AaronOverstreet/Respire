@@ -4,5 +4,8 @@
 .env.*
 !.env.example
 
+# Vite + vite-plugin-vercel local build output
+.vercel/
+
 # Local reference export only — not part of the shipped site
 Old Sites Webfiles/

@@ -1035,6 +1035,27 @@ a:hover {
   font-weight: 500;
 }
 
+.newsletter__status {
+  margin: var(--space-4) 0 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  min-height: 1.45em;
+  color: var(--color-text-muted);
+}
+
+.newsletter__status[data-tone="success"] {
+  color: var(--color-ocean);
+  font-weight: 500;
+}
+
+.newsletter__status[data-tone="error"] {
+  color: #b42318;
+}
+
+.newsletter__status[data-tone="pending"] {
+  color: var(--color-text-muted);
+}
+
 /* Service accordion */
 .service-accordion {
   display: flex;
@@ -1417,6 +1438,55 @@ a:hover {
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border);
   background: var(--color-surface-solid);
+}
+
+.contact-form__message-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-solid);
+}
+
+.contact-form__message-block:focus-within {
+  outline: 2px solid var(--color-ocean, #1ca3ec);
+  outline-offset: 1px;
+}
+
+.contact-form__field .contact-form__message-block textarea {
+  margin: 0;
+  border: none;
+  background: transparent;
+  resize: vertical;
+  min-height: 7.5rem;
+}
+
+.contact-form__field .contact-form__message-block textarea:focus {
+  outline: none;
+}
+
+.contact-form__message-status {
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.45;
+  min-height: 1.45em;
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.contact-form__message-status[data-tone="success"] {
+  color: var(--color-ocean);
+  font-weight: 500;
+}
+
+.contact-form__message-status[data-tone="error"] {
+  color: #b42318;
+}
+
+.contact-form__message-status[data-tone="pending"] {
+  color: var(--color-text-muted);
 }
 
 .contact-form__checkbox {
