@@ -33,12 +33,14 @@ export function ContactForm({ embedded = false }: { embedded?: boolean }) {
 
       const payload = (await res.json().catch(() => ({}))) as {
         error?: string;
+        hint?: string;
       };
 
       if (!res.ok) {
         setMessageTone("error");
+        const base = payload.error || "Something went wrong. Please try again.";
         setMessageStatus(
-          payload.error || "Something went wrong. Please try again.",
+          payload.hint ? `${base} (${payload.hint})` : base,
         );
         return;
       }
