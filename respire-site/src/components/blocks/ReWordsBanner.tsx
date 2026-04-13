@@ -12,8 +12,9 @@ const ENTRIES = [
   { full: "Rebuild", suffix: "build" },
 ] as const;
 
-const INTERVAL_MS = 1550;
-const FADE_MS = 520;
+const INTERVAL_MS = 3850;
+const FADE_MS = 3400;
+const INITIAL_ADVANCE_MS = 1000;
 
 type ExitTo = "left" | "right";
 
@@ -60,14 +61,22 @@ export function ReWordsBanner() {
 
   useEffect(() => {
     if (reduceMotion) return;
-    const id = window.setInterval(() => {
+    const advance = () => {
       setAnim((prev) => ({
         exiting: prev.current,
         current: (prev.current + 1) % ENTRIES.length,
         exitTo: prev.exitTo === "left" ? "right" : "left",
       }));
-    }, INTERVAL_MS);
-    return () => window.clearInterval(id);
+    };
+    let intervalId: ReturnType<typeof window.setInterval> | undefined;
+    const firstId = window.setTimeout(() => {
+      advance();
+      intervalId = window.setInterval(advance, INTERVAL_MS);
+    }, INITIAL_ADVANCE_MS);
+    return () => {
+      window.clearTimeout(firstId);
+      if (intervalId !== undefined) window.clearInterval(intervalId);
+    };
   }, [reduceMotion]);
 
   useEffect(() => {

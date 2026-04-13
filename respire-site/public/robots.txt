@@ -1,0 +1,5 @@
+# Allow all crawlers. Sitemap URL must match production host (see src/constants/site.ts SITE_ORIGIN).
+User-agent: *
+Allow: /
+
+Sitemap: https://www.respirepdx.com/sitemap.xml

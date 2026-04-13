@@ -8,9 +8,17 @@ export function ContactForm({ embedded = false }: { embedded?: boolean }) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
+    const wantsMailingList = data.get("mailing-list-opt-in") === "yes";
     const subject = encodeURIComponent(String(data.get("subject") || "Message from website"));
     const body = encodeURIComponent(
-      `Name: ${data.get("your-name")}\nEmail: ${data.get("your-email")}\n\n${data.get("your-message")}`,
+      [
+        `Name: ${data.get("your-name")}`,
+        `Email: ${data.get("your-email")}`,
+        "",
+        `Mailing list (offers, updates, events): ${wantsMailingList ? "Yes — add this contact" : "No"}`,
+        "",
+        String(data.get("your-message") ?? ""),
+      ].join("\n"),
     );
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
     setSent(true);
@@ -40,6 +48,12 @@ export function ContactForm({ embedded = false }: { embedded?: boolean }) {
       <label className="contact-form__field">
         Your message
         <textarea name="your-message" rows={6} maxLength={2000} />
+      </label>
+      <label className="contact-form__checkbox">
+        <input type="checkbox" name="mailing-list-opt-in" value="yes" />
+        <span>
+          Email me about future offers, updates, and events.
+        </span>
       </label>
       <button type="submit" className="btn btn--primary">
         Send via email

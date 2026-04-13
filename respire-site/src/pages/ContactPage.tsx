@@ -1,7 +1,7 @@
 import { ContactForm } from "../components/blocks/ContactForm";
 import { Container } from "../components/layout/Container";
 import { Section } from "../components/layout/Section";
-import { CALENDLY, PHONE_HREF } from "../constants/site";
+import { CALENDLY, PHONE_DISPLAY, PHONE_HREF } from "../constants/site";
 
 export function ContactPage() {
   return (
@@ -16,11 +16,16 @@ export function ContactPage() {
             </h1>
             <p className="contact-page__lede">
               Reach out for questions, scheduling, or a conversation about what
-              might serve you best. Call or book online—whichever is easier.
+              might serve you best. Call {PHONE_DISPLAY} or book online—whichever
+              is easier.
             </p>
             <div className="contact-page__cta-row">
-              <a className="btn btn--ghost" href={PHONE_HREF}>
-                Call Aaron
+              <a
+                className="btn btn--ghost"
+                href={PHONE_HREF}
+                aria-label={`Call ${PHONE_DISPLAY}`}
+              >
+                {PHONE_DISPLAY}
               </a>
               <a className="btn btn--primary" href={CALENDLY}>
                 Book with Calendly

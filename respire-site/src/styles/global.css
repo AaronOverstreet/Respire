@@ -611,6 +611,9 @@ a:hover {
 
 .hero__content {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
@@ -620,6 +623,7 @@ a:hover {
   flex-direction: column;
   gap: var(--space-2);
   align-items: center;
+  width: 100%;
 }
 
 .hero__title-main {
@@ -628,6 +632,9 @@ a:hover {
   font-size: clamp(3.5rem, 12vw, 6rem);
   line-height: 1;
   letter-spacing: -0.03em;
+  display: block;
+  width: 100%;
+  text-align: center;
   background: linear-gradient(
     120deg,
     var(--color-ocean),
@@ -643,13 +650,21 @@ a:hover {
 }
 
 .hero__title-sub {
-  font-size: clamp(1.55rem, 4.6vw, 2.5rem);
+  /* Slightly smaller + tighter tracking so the line matches “Respire” width */
+  font-size: clamp(1.45rem, 4.1vw, 2.35rem);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
+  /* Offset first glyph so centered text lines up under the display word */
+  padding-inline-start: 0.1em;
   color: #3d5a80;
   text-shadow: 0 0 1px rgba(255, 255, 255, 0.9), 0 0 12px rgba(255, 255, 255, 0.65),
     0 1px 2px rgba(32, 49, 78, 0.2);
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 /* ReWords — hero tagline with smooth crossfade */
@@ -658,10 +673,14 @@ a:hover {
   justify-content: center;
   align-items: center;
   margin-top: var(--space-2);
+  width: 100%;
+  text-align: center;
 }
 
 .re-words__line {
   margin: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .re-words--static {
@@ -749,44 +768,48 @@ a:hover {
 }
 
 @keyframes re-words-exit-left {
-  from {
+  0%,
+  22% {
     opacity: 1;
     transform: translateY(-50%) translateX(0);
   }
-  to {
+  100% {
     opacity: 0;
     transform: translateY(-50%) translateX(calc(-1 * min(42vw, 7rem)));
   }
 }
 
 @keyframes re-words-exit-right {
-  from {
+  0%,
+  22% {
     opacity: 1;
     transform: translateY(-50%) translateX(0);
   }
-  to {
+  100% {
     opacity: 0;
     transform: translateY(-50%) translateX(min(42vw, 7rem));
   }
 }
 
 @keyframes re-words-enter-from-right {
-  from {
+  0%,
+  22% {
     opacity: 0;
     transform: translateY(-50%) translateX(min(42vw, 7rem));
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(-50%) translateX(0);
   }
 }
 
 @keyframes re-words-enter-from-left {
-  from {
+  0%,
+  22% {
     opacity: 0;
     transform: translateY(-50%) translateX(calc(-1 * min(42vw, 7rem)));
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(-50%) translateX(0);
   }
@@ -795,25 +818,25 @@ a:hover {
 .re-words__suffix.is-exit-left {
   visibility: visible;
   z-index: 1;
-  animation: re-words-exit-left var(--re-words-fade-ms, 520ms) cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: re-words-exit-left var(--re-words-fade-ms, 3400ms) cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .re-words__suffix.is-exit-right {
   visibility: visible;
   z-index: 1;
-  animation: re-words-exit-right var(--re-words-fade-ms, 520ms) cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: re-words-exit-right var(--re-words-fade-ms, 3400ms) cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .re-words__suffix.is-enter-from-right {
   visibility: visible;
   z-index: 2;
-  animation: re-words-enter-from-right var(--re-words-fade-ms, 520ms) cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: re-words-enter-from-right var(--re-words-fade-ms, 3400ms) cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .re-words__suffix.is-enter-from-left {
   visibility: visible;
   z-index: 2;
-  animation: re-words-enter-from-left var(--re-words-fade-ms, 520ms) cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: re-words-enter-from-left var(--re-words-fade-ms, 3400ms) cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .tagline-strip {
@@ -1394,6 +1417,24 @@ a:hover {
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border);
   background: var(--color-surface-solid);
+}
+
+.contact-form__checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  font-weight: 400;
+  line-height: 1.45;
+  cursor: pointer;
+}
+
+.contact-form__checkbox input {
+  margin-top: 0.2em;
+  flex-shrink: 0;
+  width: 1.1em;
+  height: 1.1em;
+  accent-color: var(--color-ocean, #1ca3ec);
 }
 
 .contact-form__note {
