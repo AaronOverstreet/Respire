@@ -34,6 +34,7 @@ export function ContactForm({ embedded = false }: { embedded?: boolean }) {
       const payload = (await res.json().catch(() => ({}))) as {
         error?: string;
         hint?: string;
+        confirmationSent?: boolean;
       };
 
       if (!res.ok) {
@@ -47,7 +48,9 @@ export function ContactForm({ embedded = false }: { embedded?: boolean }) {
 
       setMessageTone("success");
       setMessageStatus(
-        "Sent. Check your inbox—we also emailed you a quick confirmation.",
+        payload.confirmationSent === false
+          ? "Sent. We received your message and will get back to you soon."
+          : "Sent. Check your inbox—we also emailed you a quick confirmation.",
       );
       form.reset();
     } catch {

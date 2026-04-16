@@ -1,6 +1,40 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Resend } from "resend";
 
+function parseJsonBody(req: VercelRequest): Record<string, unknown> | null {
+  const raw = req.body;
+  if (raw && typeof raw === "object" && !Array.isArray(raw)) {
+    return raw as Record<string, unknown>;
+  }
+  if (typeof raw === "string" && raw.trim()) {
+    try {
+      const parsed: unknown = JSON.parse(raw);
+      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+        return parsed as Record<string, unknown>;
+      }
+    } catch {
+      return null;
+    }
+  }
+  if (Buffer.isBuffer(raw) && raw.length > 0) {
+    try {
+      const parsed: unknown = JSON.parse(raw.toString("utf8"));
+      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+        return parsed as Record<string, unknown>;
+      }
+    } catch {
+      return null;
+    }
+  }
+  return {};
+}
+
+function resendErrorHint(err: unknown): string | undefined {
+  if (!err || typeof err !== "object") return undefined;
+  const message = (err as { message?: unknown }).message;
+  return typeof message === "string" ? message : undefined;
+}
+
 function setCors(res: VercelResponse) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -31,11 +65,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   let body: Record<string, unknown>;
   try {
-    const raw = req.body;
-    body =
-      raw && typeof raw === "object" && !Array.isArray(raw)
-        ? (raw as Record<string, unknown>)
-        : {};
+    const parsed = parseJsonBody(req);
+    if (parsed === null) {
+      return res.status(400).json({ error: "Invalid JSON body." });
+    }
+    body = parsed;
   } catch {
     return res.status(400).json({ error: "Invalid JSON body." });
   }
@@ -68,41 +102,42 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     message,
   ].join("\n");
 
-  const [toInbox, toSender] = await Promise.all([
-    resend.emails.send({
-      from,
-      to: inbox,
-      replyTo: email,
-      subject: `[Respire contact] ${subject}`,
-      text: internalText,
-    }),
-    resend.emails.send({
-      from,
-      to: email,
-      subject: "We received your message — Respire",
-      text: [
-        `Hi ${name},`,
-        "",
-        "Thanks for reaching out. This is an automatic confirmation that we received your message and will get back to you soon.",
-        "",
-        "— Respire",
-      ].join("\n"),
-    }),
-  ]);
+  const toInbox = await resend.emails.send({
+    from,
+    to: inbox,
+    replyTo: email,
+    subject: `[Respire contact] ${subject}`,
+    text: internalText,
+  });
 
-  if (toInbox.error || toSender.error) {
-    const err = toInbox.error ?? toSender.error;
-    console.error("Resend error:", err);
-    const hint =
-      err && typeof err === "object" && "message" in err
-        ? String((err as { message: unknown }).message)
-        : undefined;
+  if (toInbox.error) {
+    console.error("Resend error (inbox):", toInbox.error);
     return res.status(502).json({
       error:
-        "Could not send your message. Check that RESEND_FROM_EMAIL uses a domain verified in Resend.",
-      ...(hint ? { hint } : {}),
+        "Could not send your message. Use RESEND_FROM_EMAIL on a domain verified in Resend (Domains), or fix your API key.",
+      hint: resendErrorHint(toInbox.error),
     });
   }
 
-  return res.status(200).json({ ok: true });
+  // Until `from` uses a verified domain, Resend only allows sending to your own address;
+  // confirmation to visitors then fails with 403 while the inbox email may succeed.
+  const toSender = await resend.emails.send({
+    from,
+    to: email,
+    subject: "We received your message — Respire",
+    text: [
+      `Hi ${name},`,
+      "",
+      "Thanks for reaching out. This is an automatic confirmation that we received your message and will get back to you soon.",
+      "",
+      "— Respire",
+    ].join("\n"),
+  });
+
+  if (toSender.error) {
+    console.warn("Resend confirmation to visitor failed (inbox already sent):", toSender.error);
+    return res.status(200).json({ ok: true, confirmationSent: false });
+  }
+
+  return res.status(200).json({ ok: true, confirmationSent: true });
 }
