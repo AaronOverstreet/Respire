@@ -5,7 +5,7 @@
  * structured data. Keep in sync with `public/robots.txt`, `public/sitemap.xml`,
  * and absolute URLs in `index.html` (og:image, JSON-LD).
  */
-export const SITE_ORIGIN = "https://respirebreathwork.com";
+export const SITE_ORIGIN = "https://www.respirebreathwork.com";
 
 /**
  * Historical WordPress testimonial photos (still on the previous host until those
