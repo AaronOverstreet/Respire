@@ -35,6 +35,12 @@ export function setCors(res: VercelResponse) {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 }
 
+/** RFC 9110 — include Allow when returning 405 for API routes. */
+export function respondMethodNotAllowed(res: VercelResponse) {
+  res.setHeader("Allow", "POST, OPTIONS");
+  return res.status(405).json({ error: "Method not allowed" });
+}
+
 /** Data center suffix from Marketing API key (e.g. `xxx-us17` → `us17`). */
 export function mailchimpMarketingDc(apiKey: string): string | null {
   const parts = apiKey.split("-");

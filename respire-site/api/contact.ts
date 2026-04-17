@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { parseJsonBody, setCors } from "./_shared.js";
+import { parseJsonBody, respondMethodNotAllowed, setCors } from "./_shared.js";
 
 /** Mailchimp Transactional (mandrillapp.com) — same product family as Mailchimp Marketing but a separate API key. */
 const TRANSACTIONAL_SEND_URL = "https://mandrillapp.com/api/1.3/messages/send.json";
@@ -82,7 +82,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return respondMethodNotAllowed(res);
   }
 
   const apiKey = process.env.MAILCHIMP_TRANSACTIONAL_API_KEY?.trim();

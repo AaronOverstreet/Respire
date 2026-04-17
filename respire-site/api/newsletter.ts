@@ -1,5 +1,10 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { mailchimpMarketingDc, parseJsonBody, setCors } from "./_shared.js";
+import {
+  mailchimpMarketingDc,
+  parseJsonBody,
+  respondMethodNotAllowed,
+  setCors,
+} from "./_shared.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   setCors(res);
@@ -9,7 +14,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return respondMethodNotAllowed(res);
   }
 
   const apiKey = process.env.MAILCHIMP_API_KEY;

@@ -80,4 +80,9 @@ In the Vercel project **Settings → General**:
 2. **Framework Preset** → Vite (auto-detected)
 3. **Node.js Version** → 20.x or 22.x
 
-`vercel.json` in this folder only adds SPA rewrites so client-side routes work on refresh.
+`vercel.json` wires routing so `/api/*` is handled as serverless routes first, then the app falls back to `index.html` for client-side routing (deep links still work).
+
+### Newsletter / contact return 405
+
+- **Production:** Older SPA-only rewrites could send `POST /api/*` to the static HTML shell, which often responds with **405**. The config here puts `/api/:path*` ahead of the SPA fallback; redeploy after pulling.
+- **Local `npm run dev` (Vite only):** API routes under `api/` are **not** served—use **`npm run dev:vercel`** (`vercel dev`) so `/api/newsletter` and `/api/contact` exist locally (requires [Vercel CLI](https://vercel.com/docs/cli) and a linked project, or run against a deployed preview URL).
