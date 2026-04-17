@@ -1,16 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-
-function setCors(res: VercelResponse) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-}
-
-function mailchimpDc(apiKey: string): string | null {
-  const parts = apiKey.split("-");
-  const dc = parts[parts.length - 1];
-  return dc && /^[a-z]{2}\d+$/i.test(dc) ? dc : null;
-}
+import { mailchimpMarketingDc, parseJsonBody, setCors } from "./_shared.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   setCors(res);
@@ -33,7 +22,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   }
 
-  const dc = mailchimpDc(apiKey);
+  const dc = mailchimpMarketingDc(apiKey);
   if (!dc) {
     return res.status(503).json({
       error:
@@ -43,11 +32,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   let body: Record<string, unknown>;
   try {
-    const raw = req.body;
-    body =
-      raw && typeof raw === "object" && !Array.isArray(raw)
-        ? (raw as Record<string, unknown>)
-        : {};
+    const parsed = parseJsonBody(req);
+    if (parsed === null) {
+      return res.status(400).json({ error: "Invalid JSON body." });
+    }
+    body = parsed;
   } catch {
     return res.status(400).json({ error: "Invalid JSON body." });
   }

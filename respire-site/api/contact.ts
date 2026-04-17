@@ -1,44 +1,77 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { Resend } from "resend";
+import { parseJsonBody, setCors } from "./_shared.js";
 
-function parseJsonBody(req: VercelRequest): Record<string, unknown> | null {
-  const raw = req.body;
-  if (raw && typeof raw === "object" && !Array.isArray(raw)) {
-    return raw as Record<string, unknown>;
-  }
-  if (typeof raw === "string" && raw.trim()) {
-    try {
-      const parsed: unknown = JSON.parse(raw);
-      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
-        return parsed as Record<string, unknown>;
-      }
-    } catch {
-      return null;
-    }
-  }
-  if (Buffer.isBuffer(raw) && raw.length > 0) {
-    try {
-      const parsed: unknown = JSON.parse(raw.toString("utf8"));
-      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
-        return parsed as Record<string, unknown>;
-      }
-    } catch {
-      return null;
-    }
-  }
-  return {};
-}
+/** Mailchimp Transactional (mandrillapp.com) — same product family as Mailchimp Marketing but a separate API key. */
+const TRANSACTIONAL_SEND_URL = "https://mandrillapp.com/api/1.3/messages/send.json";
 
-function resendErrorHint(err: unknown): string | undefined {
-  if (!err || typeof err !== "object") return undefined;
-  const message = (err as { message?: unknown }).message;
-  return typeof message === "string" ? message : undefined;
-}
+type MandrillRecipientResult = {
+  email: string;
+  status: string;
+  reject_reason?: string | null;
+};
 
-function setCors(res: VercelResponse) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+type MandrillErrorBody = {
+  status: "error";
+  message?: string;
+  name?: string;
+};
+
+type TransactionalMessage = {
+  text: string;
+  subject: string;
+  from_email: string;
+  from_name?: string;
+  to: Array<{ email: string; type: "to" | "cc" | "bcc"; name?: string }>;
+  headers?: Record<string, string>;
+  tags?: string[];
+};
+
+async function sendTransactional(params: {
+  apiKey: string;
+  message: TransactionalMessage;
+}): Promise<{ ok: true } | { ok: false; detail: string }> {
+  const res = await fetch(TRANSACTIONAL_SEND_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      key: params.apiKey,
+      message: params.message,
+      async: false,
+    }),
+  });
+
+  let data: unknown;
+  try {
+    data = await res.json();
+  } catch {
+    return { ok: false, detail: "Invalid JSON from Mailchimp Transactional." };
+  }
+
+  if (!res.ok) {
+    const msg =
+      data && typeof data === "object" && "message" in data
+        ? String((data as { message?: unknown }).message)
+        : `HTTP ${res.status}`;
+    return { ok: false, detail: msg };
+  }
+
+  if (data && typeof data === "object" && (data as MandrillErrorBody).status === "error") {
+    const err = data as MandrillErrorBody;
+    return { ok: false, detail: err.message ?? err.name ?? "Mailchimp Transactional rejected the request." };
+  }
+
+  if (!Array.isArray(data)) {
+    return { ok: false, detail: "Unexpected response from Mailchimp Transactional." };
+  }
+
+  const results = data as MandrillRecipientResult[];
+  const failed = results.find((r) => r.status !== "sent" && r.status !== "queued");
+  if (failed) {
+    const reason = failed.reject_reason?.trim() || `${failed.status} (${failed.email})`;
+    return { ok: false, detail: reason };
+  }
+
+  return { ok: true };
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -52,14 +85,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.RESEND_FROM_EMAIL;
-  const inbox = process.env.CONTACT_INBOX_EMAIL;
+  const apiKey = process.env.MAILCHIMP_TRANSACTIONAL_API_KEY?.trim();
+  const fromEmail = process.env.MAILCHIMP_TRANSACTIONAL_FROM_EMAIL?.trim();
+  const fromName = process.env.MAILCHIMP_TRANSACTIONAL_FROM_NAME?.trim() || "Respire";
+  const inbox = process.env.CONTACT_INBOX_EMAIL?.trim();
 
-  if (!apiKey || !from || !inbox) {
+  if (!apiKey || !fromEmail || !inbox) {
     return res.status(503).json({
       error:
-        "Contact form is not configured on the server. Add RESEND_API_KEY, RESEND_FROM_EMAIL, and CONTACT_INBOX_EMAIL in the Vercel project settings.",
+        "Contact form is not configured on the server. Add MAILCHIMP_TRANSACTIONAL_API_KEY, MAILCHIMP_TRANSACTIONAL_FROM_EMAIL, and CONTACT_INBOX_EMAIL in the Vercel project settings.",
     });
   }
 
@@ -91,8 +125,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: "Please enter a valid email address." });
   }
 
-  const resend = new Resend(apiKey);
-
   const internalText = [
     `Name: ${name}`,
     `Email: ${email}`,
@@ -102,40 +134,48 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     message,
   ].join("\n");
 
-  const toInbox = await resend.emails.send({
-    from,
-    to: inbox,
-    replyTo: email,
-    subject: `[Respire contact] ${subject}`,
-    text: internalText,
+  const toInbox = await sendTransactional({
+    apiKey,
+    message: {
+      text: internalText,
+      subject: `[Respire contact] ${subject}`,
+      from_email: fromEmail,
+      from_name: fromName,
+      to: [{ email: inbox, type: "to" }],
+      headers: { "Reply-To": email },
+      tags: ["contact-form", "site-inquiry"],
+    },
   });
 
-  if (toInbox.error) {
-    console.error("Resend error (inbox):", toInbox.error);
+  if (!toInbox.ok) {
+    console.error("Mailchimp Transactional error (inbox):", toInbox.detail);
     return res.status(502).json({
       error:
-        "Could not send your message. Use RESEND_FROM_EMAIL on a domain verified in Resend (Domains), or fix your API key.",
-      hint: resendErrorHint(toInbox.error),
+        "Could not send your message. Verify MAILCHIMP_TRANSACTIONAL_FROM_EMAIL uses a domain with DKIM/SPF set up in Mailchimp Transactional, and your API key is valid (Transactional → SMTP & API Info).",
+      hint: toInbox.detail,
     });
   }
 
-  // Until `from` uses a verified domain, Resend only allows sending to your own address;
-  // confirmation to visitors then fails with 403 while the inbox email may succeed.
-  const toSender = await resend.emails.send({
-    from,
-    to: email,
-    subject: "We received your message — Respire",
-    text: [
-      `Hi ${name},`,
-      "",
-      "Thanks for reaching out. This is an automatic confirmation that we received your message and will get back to you soon.",
-      "",
-      "— Respire",
-    ].join("\n"),
+  const toSender = await sendTransactional({
+    apiKey,
+    message: {
+      text: [
+        `Hi ${name},`,
+        "",
+        "Thanks for reaching out. This is an automatic confirmation that we received your message and will get back to you soon.",
+        "",
+        "— Respire",
+      ].join("\n"),
+      subject: "We received your message — Respire",
+      from_email: fromEmail,
+      from_name: fromName,
+      to: [{ email, type: "to" }],
+      tags: ["contact-form", "visitor-confirmation"],
+    },
   });
 
-  if (toSender.error) {
-    console.warn("Resend confirmation to visitor failed (inbox already sent):", toSender.error);
+  if (!toSender.ok) {
+    console.warn("Mailchimp Transactional: visitor confirmation failed (inbox already sent):", toSender.detail);
     return res.status(200).json({ ok: true, confirmationSent: false });
   }
 
