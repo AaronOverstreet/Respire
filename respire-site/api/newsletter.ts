@@ -1,10 +1,16 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import {
-  mailchimpMarketingDc,
-  parseJsonBody,
-  respondMethodNotAllowed,
-  setCors,
-} from "./_shared.js";
+
+function setCors(res: VercelResponse) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+}
+
+function mailchimpDc(apiKey: string): string | null {
+  const parts = apiKey.split("-");
+  const dc = parts[parts.length - 1];
+  return dc && /^[a-z]{2}\d+$/i.test(dc) ? dc : null;
+}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   setCors(res);
@@ -14,7 +20,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   if (req.method !== "POST") {
-    return respondMethodNotAllowed(res);
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   const apiKey = process.env.MAILCHIMP_API_KEY;
@@ -27,7 +33,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   }
 
-  const dc = mailchimpMarketingDc(apiKey);
+  const dc = mailchimpDc(apiKey);
   if (!dc) {
     return res.status(503).json({
       error:
@@ -37,11 +43,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   let body: Record<string, unknown>;
   try {
-    const parsed = parseJsonBody(req);
-    if (parsed === null) {
-      return res.status(400).json({ error: "Invalid JSON body." });
-    }
-    body = parsed;
+    const raw = req.body;
+    body =
+      raw && typeof raw === "object" && !Array.isArray(raw)
+        ? (raw as Record<string, unknown>)
+        : {};
   } catch {
     return res.status(400).json({ error: "Invalid JSON body." });
   }
