@@ -13,17 +13,15 @@ export type EventItem = {
 
 export const EVENTS: EventItem[] = [
   {
-    id: "april-30-sound-breath-bath",
-    sortKey: "2026-04-30",
-    headline:
-      "April 30th Sound and Breath Bath, NW Sound Healing Instruments, Vancouver, WA",
+    id: "may-10-group-breathe",
+    sortKey: "2026-05-10",
+    headline: "May 10th — Group breathe",
     description:
-      "Breath and sound with Aaron—gentle calming breath with crystal bowls and relaxing guitar soundscapes. 7:30–9pm; suggested donation $15–30. 6531 NE Hwy 99, Vancouver, WA.",
-    href: "https://www.nwsoundhealing.com/",
+      "A monthly offering. Breathe from the comfort of your own home.",
+    href: "https://buy.stripe.com/eVqbJ2aRff1T2WF95e6kg00",
     external: true,
-    imageSrc: "/images/NW_Sound_Healing.png",
-    imageAlt:
-      "Flyer: Breath and Sound Bath with Aaron Overstreet at NW Sound Healing",
+    imageSrc: "/images/F76737EC-D57C-429A-9CA5-C8D45BFB3E8F.png",
+    imageAlt: "May 10th group breathe event flyer",
     accent: "bloom",
   },
   {
@@ -31,8 +29,8 @@ export const EVENTS: EventItem[] = [
     sortKey: "2026-05-20",
     headline: "May 20th–24th Rebirthing Breathwork International online training",
     description:
-      "Five-day online rebirthing breathwork training with RBI. Follow the link for curriculum, logistics, and enrollment.",
-    href: "https://www.rebirthingbreathwork.com/general-6",
+      "Five-day online rebirthing breathwork training. Follow the link for curriculum, logistics, and enrollment.",
+    href: "https://elviorr.wixsite.com/rebirthingbreathwork",
     external: true,
     imageSrc: "/images/Online_Birthing_Training.png",
     imageAlt:
@@ -52,16 +50,17 @@ export const EVENTS: EventItem[] = [
     accent: "coral",
   },
   {
-    id: "rbi-trainings-ongoing",
-    sortKey: "2026-12-31",
-    headline: "Rebirthing Breathwork International trainings (calendar)",
+    id: "july-22-27-sierraville-training",
+    sortKey: "2026-07-22",
+    headline: "July 22nd–27th — Sierra Hot Springs training",
     description:
-      "Browse additional seminars, intensives, and community offerings from RBI as new dates are announced.",
-    href: "https://www.rebirthingbreathwork.com/general-6",
+      "We gather together as community for deep healing at the beautiful Sierra Hot Springs in CA. All experience levels welcome.",
+    href: "https://www.rebirthingbreathworktraining.com/sierraville-training",
     external: true,
-    imageSrc: "/images/rebirthing-breathwork-international-logo.png",
-    imageAlt: "Rebirthing Breathwork International logo",
-    accent: "coral",
+    imageSrc: "/images/2A6E8A68-59FE-4B98-A52E-527469331F60.png",
+    imageAlt:
+      "Rebirthing breathwork training at Sierra Hot Springs, July 22–27",
+    accent: "sun",
   },
 ];
 
