@@ -15,7 +15,7 @@ export const EVENTS: EventItem[] = [
   {
     id: "may-10-group-breathe",
     sortKey: "2026-05-10",
-    headline: "May 10th — Group breathe",
+    headline: "Online Community Rebirthiing Breathwork Journey",
     description:
       "A monthly offering. Breathe from the comfort of your own home.",
     href: "https://buy.stripe.com/eVqbJ2aRff1T2WF95e6kg00",
@@ -30,7 +30,7 @@ export const EVENTS: EventItem[] = [
     headline: "May 20th–24th Rebirthing Breathwork International online training",
     description:
       "Five-day online rebirthing breathwork training. Follow the link for curriculum, logistics, and enrollment.",
-    href: "https://elviorr.wixsite.com/rebirthingbreathwork",
+    href: "https://elviorr.wixsite.com/rebirthingbreathwork/general-6",
     external: true,
     imageSrc: "/images/Online_Birthing_Training.png",
     imageAlt:
@@ -39,11 +39,11 @@ export const EVENTS: EventItem[] = [
   },
   {
     id: "rbi-one-year",
-    sortKey: "2026-05-21",
+    sortKey: "2026-12-31",
     headline: "One-year seminar (RBI)",
     description:
       "A monthly rhythm of community, connection, and deepening in the work—third Sunday of every month. Follow the link for curriculum and how to get involved.",
-    href: "https://www.rebirthingbreathwork.com/one-year-seminar",
+    href: "https://elviorr.wixsite.com/rebirthingbreathwork/one-year-seminar",
     external: true,
     imageSrc: "/images/One_Year_Seminar.jpeg",
     imageAlt: "One Year Seminar with Rebirthing Breathwork International",
