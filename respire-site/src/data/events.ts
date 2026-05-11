@@ -20,7 +20,7 @@ export const EVENTS: EventItem[] = [
       "A monthly offering. Breathe from the comfort of your own home.",
     href: "https://buy.stripe.com/eVqbJ2aRff1T2WF95e6kg00",
     external: true,
-    imageSrc: "/images/F76737EC-D57C-429A-9CA5-C8D45BFB3E8F.png",
+    imageSrc: "/images/FC4A6AB3-8EF9-4B3F-B739-F529BE3E1229.png",
     imageAlt: "May 10th group breathe event flyer",
     accent: "bloom",
   },
