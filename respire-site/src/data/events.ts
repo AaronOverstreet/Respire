@@ -3,7 +3,7 @@ export type EventItem = {
   /** ISO date used for display order (not always strict chronology for open-ended listings) */
   sortKey: string;
   headline: string;
-  description: string;
+  description: string | string[];
   href: string;
   external?: boolean;
   imageSrc?: string;
@@ -13,29 +13,16 @@ export type EventItem = {
 
 export const EVENTS: EventItem[] = [
   {
-    id: "june-14-group-breathe",
-    sortKey: "2026-06-14",
+    id: "aug-9-group-breathe",
+    sortKey: "2026-08-09",
     headline: "Online Rebirthing Breathwork Journey",
     description:
-      "Sunday, June 14 — 10:00 a.m.–12:30 p.m. PDT via Zoom. Sliding scale donation $2–$22. Include your email with payment when you register. Rebirthing breathwork is a gentle, conscious connected breathing method that helps dislodge tension and old trauma patterns.",
+      "Sunday, Aug 9th — 10:00 a.m.–12:30 p.m. PDT via Zoom. Sliding scale donation $2–$22. Include your email with payment when you register. Rebirthing breathwork is a gentle, conscious connected breathing method that helps dislodge tension and old trauma patterns.",
     href: "https://buy.stripe.com/eVqbJ2aRff1T2WF95e6kg00",
     external: true,
-    imageSrc: "/images/54D9932A-D997-41F7-B961-5C89F25F5698.png",
-    imageAlt: "June 14th online rebirthing breathwork journey flyer",
+    imageSrc: "/images/online-rebirthing-breathwork-journey-aug-9.png",
+    imageAlt: "August 9th online rebirthing breathwork journey flyer",
     accent: "bloom",
-  },
-  {
-    id: "may-20-24-rbi-training",
-    sortKey: "2026-05-20",
-    headline: "May 20th–24th Rebirthing Breathwork International online training",
-    description:
-      "Five-day online rebirthing breathwork training. Follow the link for curriculum, logistics, and enrollment.",
-    href: "https://elviorr.wixsite.com/rebirthingbreathwork/general-6",
-    external: true,
-    imageSrc: "/images/Online_Birthing_Training.png",
-    imageAlt:
-      "5-Day Online Rebirthing Breathwork Training, May 20th–24th, 2026",
-    accent: "sea",
   },
   {
     id: "rbi-one-year",
@@ -61,6 +48,23 @@ export const EVENTS: EventItem[] = [
     imageAlt:
       "Rebirthing breathwork training at Sierra Hot Springs, July 22–27",
     accent: "sun",
+  },
+  {
+    id: "aug-15-fasting-with-intention",
+    sortKey: "2026-08-15",
+    headline: "Fasting with Intention, Awareness and Support",
+    description: [
+      "Fasting is a great way to restore your body and improve health. It helps with repair and detoxification. Participants will be invited to fast for 36 hours (from Fri night to Sun morning). During our time together we will give attention to ourselves through meditation, gentle breathwork, easy stretching, writing exercises, journaling, and more. You will experience being supported while fully present with your body mind and emotions during the fast. The day will close with a guided rebirthing breathwork journey.",
+      "You are welcome to fast in whatever way works for you, dry fast, water fast, juice fast etc.. Please contact Aaron if you would like assistance deciding what is best for you.",
+      "You can also fast from technology (aside for our Zoom time) during the 36 hours.",
+      "Click on the image for Stripe registration. For other payment options, please contact Aaron: overstreetaaron@yahoo.com or text 503 290 6496.",
+    ],
+    href: "https://buy.stripe.com/14A5kE3oN6vncxfchq6kg01",
+    external: true,
+    imageSrc: "/images/fasting-with-intention-aug-15.png",
+    imageAlt:
+      "Fasting with Intention, Awareness and Support online workshop flyer",
+    accent: "sea",
   },
 ];
 

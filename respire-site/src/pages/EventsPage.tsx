@@ -35,6 +35,9 @@ export function EventsPage() {
                 ev.accent && ACCENT_CLASS[ev.accent]
                   ? ACCENT_CLASS[ev.accent]
                   : "";
+              const descriptionParagraphs = Array.isArray(ev.description)
+                ? ev.description
+                : [ev.description];
               const linkProps = ev.external
                 ? { target: "_blank" as const, rel: "noopener noreferrer" as const }
                 : {};
@@ -73,7 +76,14 @@ export function EventsPage() {
                           {ev.headline}
                         </a>
                       </h2>
-                      <p className="events-list__desc">{ev.description}</p>
+                      {descriptionParagraphs.map((paragraph, index) => (
+                        <p
+                          className="events-list__desc"
+                          key={`${ev.id}-desc-${index}`}
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
                     </div>
                   </div>
                 </li>
