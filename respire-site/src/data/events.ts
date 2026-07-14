@@ -50,8 +50,8 @@ export const EVENTS: EventItem[] = [
     accent: "sun",
   },
   {
-    id: "aug-15-fasting-with-intention",
-    sortKey: "2026-08-15",
+    id: "aug-22-fasting-with-intention",
+    sortKey: "2026-08-22",
     headline: "Fasting with Intention, Awareness and Support",
     description: [
       "Fasting is a great way to restore your body and improve health. It helps with repair and detoxification. Participants will be invited to fast for 36 hours (from Fri night to Sun morning). During our time together we will give attention to ourselves through meditation, gentle breathwork, easy stretching, writing exercises, journaling, and more. You will experience being supported while fully present with your body mind and emotions during the fast. The day will close with a guided rebirthing breathwork journey.",
@@ -61,7 +61,7 @@ export const EVENTS: EventItem[] = [
     ],
     href: "https://buy.stripe.com/14A5kE3oN6vncxfchq6kg01",
     external: true,
-    imageSrc: "/images/fasting-with-intention-aug-15.png",
+    imageSrc: "/images/fasting-with-intention-aug-22.png",
     imageAlt:
       "Fasting with Intention, Awareness and Support online workshop flyer",
     accent: "sea",
