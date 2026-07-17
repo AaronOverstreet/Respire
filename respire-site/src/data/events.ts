@@ -13,6 +13,20 @@ export type EventItem = {
 
 export const EVENTS: EventItem[] = [
   {
+    id: "july-29-prana-portal",
+    sortKey: "2026-07-29",
+    headline: "Prana Portal — Breath, Movement & Music Workshop",
+    description: [
+      "Wednesday, July 29th, 7:30–9 p.m. — FREE. NW Sound Healing Instruments, 6531 NW Highway 99, Vancouver, WA.",
+      "\"Prana Portal\" is an hour long music, movement and breath workshop. Designed to harmonize your breath, heartbeat, and mind. It is a guided exploration into fun and play with Pranayama, dance and original music.",
+    ],
+    href: "https://www.google.com/maps/search/?api=1&query=NW+Sound+Healing+Instruments+6531+NW+Highway+99+Vancouver+WA",
+    external: true,
+    imageSrc: "/images/prana-portal-july-29.png",
+    imageAlt: "Prana Portal breath, movement and music workshop flyer, July 29th",
+    accent: "bloom",
+  },
+  {
     id: "aug-9-group-breathe",
     sortKey: "2026-08-09",
     headline: "Online Rebirthing Breathwork Journey",
