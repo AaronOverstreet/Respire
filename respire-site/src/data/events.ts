@@ -39,6 +39,23 @@ export const EVENTS: EventItem[] = [
     accent: "bloom",
   },
   {
+    id: "sept-18-20-theta-portal",
+    sortKey: "2026-09-18",
+    headline: "Theta Portal Gathering — September 18th–20th",
+    description: [
+      "September 18th–20th in St Helens, OR. Join us for a day or the whole weekend.",
+      "This special event is a heartfelt endeavor to nurture our vibrant community through breath, sound, and synergy. Theta Portal harnesses the transformative power of expertly facilitated rebirthing breathwork in a large group setting, where dynamic soundscapes and the shared field of consciousness exponentially amplify the individual capacity for healing.",
+      "Come for a day, or stay the whole weekend and camp under the stars. Day guests are welcome to join us for breathwork sessions, sound journeys, and the evening fire circle; weekend campers get the full arc — shared meals, unstructured time in nature, and the kind of depth that only comes from staying present together over time.",
+      "No performance, no pretense — just breath, sound, and space to be human. This event will be extra special, as it is Adina's final Theta Portal as facilitator and event producer.",
+    ],
+    href: "https://thetaportalevents.com/events",
+    external: true,
+    imageSrc: "/images/theta-portal-sept-18-20.png",
+    imageAlt:
+      "Theta Portal Gathering flyer, September 18–20 in St Helens, OR",
+    accent: "sea",
+  },
+  {
     id: "rbi-one-year",
     sortKey: "2026-12-31",
     headline: "One-year seminar (RBI)",
