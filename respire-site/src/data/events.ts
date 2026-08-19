@@ -2,6 +2,8 @@ export type EventItem = {
   id: string;
   /** ISO date used for display order (not always strict chronology for open-ended listings) */
   sortKey: string;
+  /** Pinned events are listed ahead of the chronological run */
+  pinned?: boolean;
   headline: string;
   description: string | string[];
   href: string;
@@ -13,29 +15,35 @@ export type EventItem = {
 
 export const EVENTS: EventItem[] = [
   {
-    id: "july-29-prana-portal",
-    sortKey: "2026-07-29",
-    headline: "Prana Portal — Breath, Movement & Music Workshop",
+    id: "oct-14-18-rbi-online-training",
+    sortKey: "2026-10-14",
+    pinned: true,
+    headline:
+      "Oct 14th–18th Online Rebirthing Breathwork International Training/Retreat",
     description: [
-      "Wednesday, July 29th, 7:30–9 p.m. — FREE. NW Sound Healing Instruments, 6531 NW Highway 99, Vancouver, WA.",
-      "\"Prana Portal\" is an hour long music, movement and breath workshop. Designed to harmonize your breath, heartbeat, and mind. It is a guided exploration into fun and play with Pranayama, dance and original music.",
+      "Join Rebirthing Breathwork International trainers Aaron Overstreet, Deanna Reiter, Kalyani Buckman and Susan Shehata for a deep dive into the practice, the physiology, the psychology, and the philosophy of rebirthing breathwork. We strive to keep rebirthing breathwork traditional and true to Leonard Orr's teachings while staying up to date with modern information about the breath and trauma healing. We are all direct students of Leonard Orr and are honored to continue this powerful work.",
+      "We'll meet you where you're at on your breathwork journey. New to breathwork? Need a personal healing retreat? Have you been doing breathwork for years and feel ready to teach others this amazing transformative practice? Have you taken a past RBI workshop and are ready to continue your training or complete your certification?",
+      "Participants will receive four rebirthing breathwork sessions. One on each of the four full days. Each of those days will also include morning and afternoon classes. We will meet for introductions and basics on Wed Oct 14th from 4–6 p.m. PDT. Thurs through Sun the schedule will be 9 a.m. to 4:30 p.m. PDT with a break for lunch. All classes will be recorded and participants will receive a link.",
+      "Connect with community and treat yourself to some deep healing. Please contact Aaron with any questions: overstreetaaron@yahoo.com or 503 290 6496.",
+      "Click on the image to register via Stripe. Contact Aaron for Venmo, Zelle, or Paypal.",
     ],
-    href: "https://www.google.com/maps/search/?api=1&query=NW+Sound+Healing+Instruments+6531+NW+Highway+99+Vancouver+WA",
+    href: "https://buy.stripe.com/3cI5kEgbzg5XgNvchq6kg02",
     external: true,
-    imageSrc: "/images/prana-portal-july-29.png",
-    imageAlt: "Prana Portal breath, movement and music workshop flyer, July 29th",
-    accent: "bloom",
+    imageSrc: "/images/rbi-online-training-oct-14-18.png",
+    imageAlt:
+      "Rebirthing Breathwork International online training flyer, October 14–18",
+    accent: "sun",
   },
   {
-    id: "aug-9-group-breathe",
-    sortKey: "2026-08-09",
+    id: "sept-6-group-breathe",
+    sortKey: "2026-09-06",
     headline: "Online Rebirthing Breathwork Journey",
     description:
-      "Sunday, Aug 9th — 10:00 a.m.–12:30 p.m. PDT via Zoom. Sliding scale donation $2–$22. Include your email with payment when you register. Rebirthing breathwork is a gentle, conscious connected breathing method that helps dislodge tension and old trauma patterns.",
+      "Sunday, Sept 6th — 10:00 a.m.–12:30 p.m. PDT via Zoom. Sliding scale donation $2–$22. Include your email with payment when you register. Rebirthing breathwork is a gentle, conscious connected breathing method that helps dislodge tension and old trauma patterns.",
     href: "https://buy.stripe.com/eVqbJ2aRff1T2WF95e6kg00",
     external: true,
-    imageSrc: "/images/online-rebirthing-breathwork-journey-aug-9.png",
-    imageAlt: "August 9th online rebirthing breathwork journey flyer",
+    imageSrc: "/images/online-rebirthing-breathwork-journey-sept-6.png",
+    imageAlt: "September 6th online rebirthing breathwork journey flyer",
     accent: "bloom",
   },
   {
@@ -67,38 +75,11 @@ export const EVENTS: EventItem[] = [
     imageAlt: "One Year Seminar with Rebirthing Breathwork International",
     accent: "coral",
   },
-  {
-    id: "july-22-27-sierraville-training",
-    sortKey: "2026-07-22",
-    headline: "July 22nd–27th — Sierra Hot Springs training",
-    description:
-      "We gather together as community for deep healing at the beautiful Sierra Hot Springs in CA. All experience levels welcome.",
-    href: "https://www.rebirthingbreathworktraining.com/sierraville-training",
-    external: true,
-    imageSrc: "/images/2A6E8A68-59FE-4B98-A52E-527469331F60.png",
-    imageAlt:
-      "Rebirthing breathwork training at Sierra Hot Springs, July 22–27",
-    accent: "sun",
-  },
-  {
-    id: "aug-22-fasting-with-intention",
-    sortKey: "2026-08-22",
-    headline: "Fasting with Intention, Awareness and Support",
-    description: [
-      "Fasting is a great way to restore your body and improve health. It helps with repair and detoxification. Participants will be invited to fast for 36 hours (from Fri night to Sun morning). During our time together we will give attention to ourselves through meditation, gentle breathwork, easy stretching, writing exercises, journaling, and more. You will experience being supported while fully present with your body mind and emotions during the fast. The day will close with a guided rebirthing breathwork journey.",
-      "You are welcome to fast in whatever way works for you, dry fast, water fast, juice fast etc.. Please contact Aaron if you would like assistance deciding what is best for you.",
-      "You can also fast from technology (aside for our Zoom time) during the 36 hours.",
-      "Click on the image for Stripe registration. For other payment options, please contact Aaron: overstreetaaron@yahoo.com or text 503 290 6496.",
-    ],
-    href: "https://buy.stripe.com/14A5kE3oN6vncxfchq6kg01",
-    external: true,
-    imageSrc: "/images/fasting-with-intention-aug-22.png",
-    imageAlt:
-      "Fasting with Intention, Awareness and Support online workshop flyer",
-    accent: "sea",
-  },
 ];
 
 export function eventsChronological(): EventItem[] {
-  return [...EVENTS].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+  return [...EVENTS].sort((a, b) => {
+    if (Boolean(a.pinned) !== Boolean(b.pinned)) return a.pinned ? -1 : 1;
+    return a.sortKey.localeCompare(b.sortKey);
+  });
 }
