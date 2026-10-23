@@ -15,26 +15,6 @@ export type EventItem = {
 
 export const EVENTS: EventItem[] = [
   {
-    id: "oct-14-18-rbi-online-training",
-    sortKey: "2026-10-14",
-    pinned: true,
-    headline:
-      "Oct 14th–18th Online Rebirthing Breathwork International Training/Retreat",
-    description: [
-      "Join Rebirthing Breathwork International trainers Aaron Overstreet, Deanna Reiter, Kalyani Buckman and Susan Shehata for a deep dive into the practice, the physiology, the psychology, and the philosophy of rebirthing breathwork. We strive to keep rebirthing breathwork traditional and true to Leonard Orr's teachings while staying up to date with modern information about the breath and trauma healing. We are all direct students of Leonard Orr and are honored to continue this powerful work.",
-      "We'll meet you where you're at on your breathwork journey. New to breathwork? Need a personal healing retreat? Have you been doing breathwork for years and feel ready to teach others this amazing transformative practice? Have you taken a past RBI workshop and are ready to continue your training or complete your certification?",
-      "Participants will receive four rebirthing breathwork sessions. One on each of the four full days. Each of those days will also include morning and afternoon classes. We will meet for introductions and basics on Wed Oct 14th from 4–6 p.m. PDT. Thurs through Sun the schedule will be 9 a.m. to 4:30 p.m. PDT with a break for lunch. All classes will be recorded and participants will receive a link.",
-      "Connect with community and treat yourself to some deep healing. Please contact Aaron with any questions: overstreetaaron@yahoo.com or 503 290 6496.",
-      "Click on the image to register via Stripe. Contact Aaron for Venmo, Zelle, or Paypal.",
-    ],
-    href: "https://buy.stripe.com/3cI5kEgbzg5XgNvchq6kg02",
-    external: true,
-    imageSrc: "/images/rbi-online-training-oct-14-18.png",
-    imageAlt:
-      "Rebirthing Breathwork International online training flyer, October 14–18",
-    accent: "sun",
-  },
-  {
     id: "nov-1-group-breathe",
     sortKey: "2026-11-01",
     headline: "Online Rebirthing Breathwork Journey",
