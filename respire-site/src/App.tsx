@@ -7,7 +7,6 @@ import { DisclaimerPage } from "./pages/DisclaimerPage";
 import { EventsPage } from "./pages/EventsPage";
 import { HomePage } from "./pages/HomePage";
 import { PrivacyPage } from "./pages/PrivacyPage";
-import { ReidPage } from "./pages/ReidPage";
 import { ServicesPage } from "./pages/ServicesPage";
 import { TestimonialsPage } from "./pages/TestimonialsPage";
 
@@ -21,7 +20,6 @@ export default function App() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/events" element={<EventsPage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/reid" element={<ReidPage />} />
           <Route path="/testimonials" element={<TestimonialsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/privacy-policy" element={<PrivacyPage />} />

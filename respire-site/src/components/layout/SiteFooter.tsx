@@ -10,9 +10,6 @@ export function SiteFooter() {
         </p>
         <ul className="site-footer__legal">
           <li>
-            <Link to="/reid">About Reid</Link>
-          </li>
-          <li>
             <Link to="/privacy-policy">Privacy Policy</Link>
           </li>
           <li>
