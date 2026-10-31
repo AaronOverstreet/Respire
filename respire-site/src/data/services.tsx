@@ -64,16 +64,16 @@ export const SERVICE_SECTIONS: {
           world and the gifts we have to offer.
         </p>
         <p>
-          <strong>Standard rates:</strong>
+          <strong>November sale rates:</strong>
         </p>
         <ul>
           <li>
             <strong>In-person</strong> Rebirthing Breathwork Session (2–3
-            hours): <strong>$180</strong>
+            hours): <strong>$144</strong>{" "}<span>reg $180</span>
           </li>
           <li>
             <strong>Zoom</strong> Rebirthing Breathwork Session (2–3 hours):{" "}
-            <strong>$160</strong>
+            <strong>$128</strong>{" "}<span>reg $160</span>
           </li>
         </ul>
         <p>
@@ -105,16 +105,16 @@ export const SERVICE_SECTIONS: {
           Zoom.
         </p>
         <p>
-          <strong>Standard rates:</strong>
+          <strong>November sale rates:</strong>
         </p>
         <ul>
           <li>
             <strong>In-person</strong> Core Story Session (2 hours):{" "}
-            <strong>$160</strong>
+            <strong>$128</strong>{" "}<span>reg $160</span>
           </li>
           <li>
             <strong>Zoom</strong> Core Story Session (2 hours):{" "}
-            <strong>$140</strong>
+            <strong>$112</strong>{" "}<span>reg $140</span>
           </li>
         </ul>
         <p>
@@ -140,16 +140,16 @@ export const SERVICE_SECTIONS: {
           digestion, mental clarity, and more.
         </p>
         <p>
-          <strong>Standard rates:</strong>
+          <strong>November sale rates:</strong>
         </p>
         <ul>
           <li>
             <strong>In-person</strong> Daily Practice Session (90 min):{" "}
-            <strong>$160</strong>
+            <strong>$128</strong>{" "}<span>reg $160</span>
           </li>
           <li>
             <strong>Zoom</strong> Daily Practice Session (90 min):{" "}
-            <strong>$140</strong>
+            <strong>$112</strong>{" "}<span>reg $140</span>
           </li>
         </ul>
         <p>
@@ -190,16 +190,16 @@ export const SERVICE_SECTIONS: {
           minutes, in-person or on Zoom.
         </p>
         <p>
-          <strong>Standard rates:</strong>
+          <strong>November sale rates:</strong>
         </p>
         <ul>
           <li>
             <strong>In-person</strong> Mentoring Session (90 min):{" "}
-            <strong>$160</strong>
+            <strong>$128</strong>{" "}<span>reg $160</span>
           </li>
           <li>
             <strong>Zoom</strong> Mentoring Session (90 min):{" "}
-            <strong>$140</strong>
+            <strong>$112</strong>{" "}<span>reg $140</span>
           </li>
         </ul>
         <p>
