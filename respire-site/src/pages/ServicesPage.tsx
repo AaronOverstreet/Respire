@@ -3,6 +3,7 @@ import { Container } from "../components/layout/Container";
 import { Section } from "../components/layout/Section";
 import { CALENDLY } from "../constants/site";
 import { SERVICE_SECTIONS } from "../data/services";
+import "./ServicesPage.css";
 
 export function ServicesPage() {
   const items = SERVICE_SECTIONS.map((s) => ({
@@ -16,6 +17,10 @@ export function ServicesPage() {
   return (
     <Section tone="cool" className="section--services-page">
       <Container>
+        <aside className="services-sale" aria-label="November sale">
+          <span className="services-sale__label">November Sale</span>
+          <p className="services-sale__offer">20% off all sessions</p>
+        </aside>
         <header className="services-page__masthead" aria-labelledby="services-page-heading">
           <div className="services-page__masthead-deco" aria-hidden />
           <p className="services-page__eyebrow">Sessions & support</p>
