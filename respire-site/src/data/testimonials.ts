@@ -20,6 +20,20 @@ export const TESTIMONIALS: Testimonial[] = [
       "Aaron is a dependable and talented Rebirthing Breathworker. He cares for all of his clients and gives them good service.\n\nIn Truth, Simplicity, and Love,",
   },
   {
+    id: "amy-yillik",
+    name: "Dr. Amy Yillik",
+    imageSrc: "/images/testimonials/amy-yillik.png",
+    quote:
+      "Working with Aaron Overstreet as both a client and a student has been game-changing. Healing from trauma requires more than meaning-making; it requires emotional and somatic release, and Aaron creates the exact space needed for that to happen. He is remarkably skilled, grounded, and compassionate.  Working with him has become a non-negotiable anchor in my wellness, and having him as a mentor is priceless. Learning directly through regular practice has skyrocketed my confidence and capability as a practitioner. Investing in this work is easily one of the best decisions I’ve made for both my nervous system and my career.",
+  },
+  {
+    id: "tucker-forbes",
+    name: "Tucker Forbes",
+    imageSrc: "/images/testimonials/tucker-forbes.jpg",
+    quote:
+      "Working with Aaron has been fantastic, to put it in one word. He's helped me work through lots of trauma with my family in a way that feels like he can be a “compassionate rock” that is both stable and warm, and help me just feel whatever feelings are arising in the moment, without fear. Through talking both before and after the breathwork sessions, we're able to dive into the actual root issues, or at least get deeper into emotional causes, and I have never felt as able to just freely express or feel whatever feelings arise. On top of that, the method of breathwork he uses is fantastic for letting things process through, finding kind of where stored traumas are(lots of times it’s hidden ones that you didn’t know were there) and letting them process out. My breath's gotten better, my life has gotten much better, and it's only been a few months of working with each other weekly. Highly, highly recommend.",
+  },
+  {
     id: "jenna-eckert",
     name: "Jenna Eckert",
     imageSrc: `${TESTIMONIAL_IMAGE_ORIGIN}/wp-content/uploads/2018/01/jenna_testimonial_img1.jpg`,

@@ -12,7 +12,7 @@ import { Container } from "../components/layout/Container";
 import { Section } from "../components/layout/Section";
 import { TESTIMONIALS } from "../data/testimonials";
 
-const previewIds = ["jenna-eckert", "malcolm-smith", "constantine-waes"];
+const previewIds = ["amy-yillik", "tucker-forbes", "jenna-eckert"];
 
 export function HomePage() {
   const featured = TESTIMONIALS.find((t) => t.featured);

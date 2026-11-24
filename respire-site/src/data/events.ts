@@ -15,18 +15,6 @@ export type EventItem = {
 
 export const EVENTS: EventItem[] = [
   {
-    id: "nov-1-group-breathe",
-    sortKey: "2026-11-01",
-    headline: "Online Rebirthing Breathwork Journey",
-    description:
-      "Sunday, Nov 1st — 10:00 a.m.–12:30 p.m. PST via Zoom. Sliding scale donation $2–$22. Include your email with payment when you register. Rebirthing breathwork is a gentle, conscious connected breathing method that helps dislodge tension and old trauma patterns.",
-    href: "https://buy.stripe.com/eVqbJ2aRff1T2WF95e6kg00",
-    external: true,
-    imageSrc: "/images/online-rebirthing-breathwork-journey-nov-1.png",
-    imageAlt: "November 1st online rebirthing breathwork journey flyer",
-    accent: "bloom",
-  },
-  {
     id: "rbi-one-year",
     sortKey: "2026-12-31",
     headline: "One-year seminar (RBI)",
