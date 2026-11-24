@@ -20,7 +20,7 @@ export const EVENTS: EventItem[] = [
     headline: "One-year seminar (RBI)",
     description:
       "A monthly rhythm of community, connection, and deepening in the work—third Sunday of every month. Follow the link for curriculum and how to get involved.",
-    href: "https://elviorr.wixsite.com/rebirthingbreathwork/one-year-seminar",
+    href: "https://rebirthingbreathworktraining.com",
     external: true,
     imageSrc: "/images/One_Year_Seminar.jpeg",
     imageAlt: "One Year Seminar with Rebirthing Breathwork International",
